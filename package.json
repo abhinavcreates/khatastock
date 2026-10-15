@@ -1,0 +1,9 @@
+{
+  "name": "khatastock",
+  "private": true,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "npm install --prefix server && npm install --prefix client --include=dev && npm run build --prefix client",
+    "start": "node server/server.js"
+  }
+}

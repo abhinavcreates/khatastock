@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #FAF7F0;      /* page background */
+  --color-page: #FFFDF8;       /* inputs and the login page */
+  --color-ink: #231F1A;        /* text, buttons */
+  --color-line: #D9D2C3;       /* ruled lines */
+  --color-margin: #D9A48F;     /* khata margin line */
+  --color-brick: #B5451B;      /* money due, expired, delete */
+  --color-brick-dark: #94380F;
+  --color-turmeric: #E8B64C;   /* expiring soon */
+  --color-turmeric-ink: #7A4E00;
+  --color-wa: #1F6B45;         /* WhatsApp actions */
+  --color-wa-dark: #17553A;
+  --font-sans: "Noto Sans", system-ui, sans-serif;
+  --font-display: "Mukta", "Noto Sans", system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* amounts and quantities line up in columns */
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* double margin line on the left, like a khata page */
+.ledger {
+  border-left: 4px double var(--color-margin);
+  padding-left: 0.75rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
