@@ -2,12 +2,11 @@
 
 A web app for small kirana shops. It keeps a list of the items in the shop with their quantity and expiry date, and it keeps the udhaar (credit) ledger of every customer.
 
-Live: https://YOUR-APP-NAME.onrender.com
+Live:  https://khatastock.onrender.com
 Demo login: `demo@example.com` / `demo1234`
 
 The demo shop has made-up data and the phone numbers in it are fake. The site is on Render's free plan, so if nobody has opened it for 15 minutes the first load takes around a minute while the server wakes up.
 
-<!-- Add a link to the demo video here once it is recorded -->
 
 ## Why I made this
 
@@ -15,7 +14,6 @@ Small shops usually write udhaar in a notebook and check expiry dates by looking
 
 I wanted something that works on a cheap phone at the counter, so the shopkeeper can write an item or an entry in a few taps and see who owes what without adding anything up.
 
-<!-- After talking to shopkeepers, write here what they actually said: how they track udhaar today, what goes wrong, what they asked for. Remove this comment. -->
 
 ## What it does
 
@@ -33,7 +31,7 @@ You sign up with a shop name, email and password. Each shop only ever sees its o
 
 *Money is stored in paise as whole numbers.* Adding 0.1 and 0.2 in JavaScript does not give 0.3, and I did not want a customer's balance to be off by a paisa.
 
-*A balance is never saved.* Every time it is needed, it is calculated from that customer's entries (given minus received) with a MongoDB aggregation. So if the shopkeeper deletes a wrong entry the balance is right again without anything else to fix. The running "Baaki" column in the khata table is worked out backwards from the current balance, so it stays correct even though the page loads only the latest 200 entries.
+*A balance is never saved.* Every time it is needed, it is calculated from that customer's entries (given - received) with a MongoDB aggregation. So if the shopkeeper deletes a wrong entry the balance is right again without anything else to fix. The running "Baaki" column in the khata table is worked out backwards from the current balance, so it stays correct even though the page loads only the latest 200 entries.
 
 *Deleting an entry really deletes it.* A proper accounting ledger would never delete, it would add a reverse entry. I thought about doing that, but a shopkeeper who made a typing mistake will not understand a "reversal" row. The cost is that there is no history of what was changed.
 
@@ -68,17 +66,6 @@ Open http://localhost:5173. Vite forwards `/api` calls to the server on port 500
 
 To fill the app with demo data, run `npm run seed` inside `server`. Run it again any time to reset the demo shop. The expiry dates are set relative to the day you run it.
 
-## Deploying
-
-I use Render (a single web service) and MongoDB Atlas.
-
-1. Push the repo to GitHub. Check that `.env` is not in it.
-2. In Atlas, under Network Access, allow `0.0.0.0/0`. Render's free plan has no fixed IP.
-3. On Render create a Web Service from the repo with these settings:
-   - Build command: `npm run build`
-   - Start command: `npm start`
-   - Environment variables: `NODE_ENV=production`, `MONGO_URI`, `JWT_SECRET`
-4. After it is live, run `npm run seed` from `server` on your own machine with the same `MONGO_URI` to create the demo shop.
 
 ## API
 
